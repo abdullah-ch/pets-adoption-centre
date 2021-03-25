@@ -1,5 +1,9 @@
 # pet-store
 
+What are slots in Vue.js
+->
+
+
 ## Project setup
 ```
 npm install
