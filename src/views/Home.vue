@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>Adopt a New Best Friend</h1>
+    <h2>Total Pets : {{ totalPets }}</h2>
     <button @click="formShow" class="btn btn-primary">Add New Pet</button>
 
     <b-form @submit.prevent="handleSubmit" v-if="showForm === true">
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Home",
 
@@ -50,26 +51,29 @@ export default {
     return {
       showForm: false,
       formData: {
-        age: 0,
+        age: null,
         specie: null,
         name: "",
       },
     };
   },
+  computed: {
+    ...mapGetters(["totalPets"]),
+  },
   methods: {
-    ...mapActions["appendPet"],
+    ...mapActions(["appendPet"]),
     formShow() {
       this.showForm = !this.showForm;
     },
 
     handleSubmit() {
-      console.log("hello this is the handle submit method");
-      // console.log("mapActions", ...mapActions);
-      // console.log("appendPet gnnn.................", this.appendPet);
+      console.log("appendPet gnnn.................", this.appendPet);
       const { specie, age, name } = this.formData;
-      console.log("specie , age and name are", specie, age, name);
+
       const payload = { specie, pet: { name, age } };
       this.appendPet(payload);
+
+      this.formData = { age: null, specie: null, name: "" };
     },
   },
 };
