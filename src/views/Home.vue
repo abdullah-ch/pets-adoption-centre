@@ -61,7 +61,7 @@ export default {
     ...mapGetters(["totalPets"]),
   },
   methods: {
-    ...mapActions(["appendPet"]),
+    ...mapActions(["addPet"]),
     formShow() {
       this.showForm = !this.showForm;
     },
@@ -71,7 +71,7 @@ export default {
       const { specie, age, name } = this.formData;
 
       const payload = { specie, pet: { name, age } };
-      this.appendPet(payload);
+      this.addPet(payload);
 
       this.formData = { age: null, specie: null, name: "" };
     },
